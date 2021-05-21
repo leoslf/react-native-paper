@@ -17,6 +17,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  containerStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -51,12 +52,17 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
  */
 
-const DataTableCell = ({ children, style, numeric, ...rest }: Props) => (
+const DataTableCell = ({ children, containerStyle, style, numeric, ...rest }: Props) => (
   <TouchableRipple
     {...rest}
-    style={[styles.container, numeric && styles.right, style]}
+    style={[styles.container, numeric && styles.right, containerStyle]}
   >
-    <Text numberOfLines={1}>{children}</Text>
+    <Text
+      style={style}
+      numberOfLines={1}
+    >
+      {children}
+    </Text>
   </TouchableRipple>
 );
 
